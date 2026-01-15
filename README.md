@@ -23,13 +23,13 @@ Opus 4.5 │ feat/my-branch● │ my-project │ ▓▓▓░░░░░░░
 ## Quick Install
 
 ```bash
-mkdir -p ~/.claude/scripts && curl -fsSL https://raw.githubusercontent.com/dd-avrillo/cc-status-line/main/status-line.sh -o ~/.claude/scripts/status-line.sh && chmod +x ~/.claude/scripts/status-line.sh
+mkdir -p ~/.claude/scripts && curl -fsSL https://raw.githubusercontent.com/danjdewhurst/cc-status-line/main/status-line.sh -o ~/.claude/scripts/status-line.sh && chmod +x ~/.claude/scripts/status-line.sh
 ```
 
 Or with wget:
 
 ```bash
-mkdir -p ~/.claude/scripts && wget -qO ~/.claude/scripts/status-line.sh https://raw.githubusercontent.com/dd-avrillo/cc-status-line/main/status-line.sh && chmod +x ~/.claude/scripts/status-line.sh
+mkdir -p ~/.claude/scripts && wget -qO ~/.claude/scripts/status-line.sh https://raw.githubusercontent.com/danjdewhurst/cc-status-line/main/status-line.sh && chmod +x ~/.claude/scripts/status-line.sh
 ```
 
 Then add to `~/.claude/settings.json`:
