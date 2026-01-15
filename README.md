@@ -2,8 +2,6 @@
 
 A custom status line for [Claude Code](https://github.com/anthropics/claude-code) featuring the [Catppuccin Frappe](https://catppuccin.com/) color palette.
 
-![Status Line Preview](preview.png)
-
 ```
 Opus 4.5 │ feat/my-branch● │ my-project │ ▓▓▓░░░░░░░ 15k/200k │ $0.03
 ```
@@ -22,7 +20,30 @@ Opus 4.5 │ feat/my-branch● │ my-project │ ▓▓▓░░░░░░░
 - `jq` for JSON parsing
 - `git` (optional, for branch display)
 
-## Installation
+## Quick Install
+
+```bash
+mkdir -p ~/.claude/scripts && curl -fsSL https://raw.githubusercontent.com/dd-avrillo/cc-status-line/main/status-line.sh -o ~/.claude/scripts/status-line.sh && chmod +x ~/.claude/scripts/status-line.sh
+```
+
+Or with wget:
+
+```bash
+mkdir -p ~/.claude/scripts && wget -qO ~/.claude/scripts/status-line.sh https://raw.githubusercontent.com/dd-avrillo/cc-status-line/main/status-line.sh && chmod +x ~/.claude/scripts/status-line.sh
+```
+
+Then add to `~/.claude/settings.json`:
+
+```json
+{
+  "statusLine": {
+    "type": "command",
+    "command": "~/.claude/scripts/status-line.sh"
+  }
+}
+```
+
+## Manual Installation
 
 1. Copy the script to your Claude scripts directory:
 
