@@ -4,9 +4,9 @@
 # Catppuccin Frappe theme
 
 # Configuration
-CURRENCY='£'              # Currency symbol (e.g., '$', '€', '£', '¥')
-CURRENCY_CODE='GBP'       # ISO 4217 code for API lookup (e.g., 'GBP', 'EUR', 'JPY')
-EXCHANGE_RATE=0.79        # Fallback rate if API unavailable
+CURRENCY='$'              # Currency symbol (e.g., '$', '€', '£', '¥')
+CURRENCY_CODE='USD'       # ISO 4217 code for API lookup (e.g., 'USD', 'GBP', 'EUR', 'JPY')
+EXCHANGE_RATE=1           # Fallback rate if API unavailable
 
 # Cache settings
 CACHE_DIR="${HOME}/.cache/cc-status-line"

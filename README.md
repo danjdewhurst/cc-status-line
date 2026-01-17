@@ -3,7 +3,7 @@
 A custom status line for [Claude Code](https://github.com/anthropics/claude-code) featuring the [Catppuccin Frappe](https://catppuccin.com/) color palette.
 
 ```
-Opus 4.5 │ feat/my-branch● │ my-project │ ▓▓▓░░░░░░░ 15k/200k │ £0.02
+Opus 4.5 │ feat/my-branch● │ my-project │ ▓▓▓░░░░░░░ 15k/200k │ $0.03
 ```
 
 ## Features
@@ -86,21 +86,21 @@ chmod +x ~/.claude/scripts/status-line.sh
 
 ### Change currency
 
-Exchange rates are fetched automatically from [Frankfurter API](https://www.frankfurter.app/) and cached for 24 hours. Edit the currency symbol and code (default GBP):
+Exchange rates are fetched automatically from [Frankfurter API](https://www.frankfurter.app/) and cached for 24 hours. Edit the currency symbol and code (default USD):
 
 ```bash
-CURRENCY='£'              # Currency symbol
-CURRENCY_CODE='GBP'       # ISO 4217 code for API lookup
-EXCHANGE_RATE=0.79        # Fallback if API unavailable
+CURRENCY='$'              # Currency symbol
+CURRENCY_CODE='USD'       # ISO 4217 code for API lookup
+EXCHANGE_RATE=1           # Fallback if API unavailable
 ```
 
 Other examples:
 
 ```bash
-# US Dollars (no conversion)
-CURRENCY='$'
-CURRENCY_CODE='USD'
-EXCHANGE_RATE=1
+# British Pounds
+CURRENCY='£'
+CURRENCY_CODE='GBP'
+EXCHANGE_RATE=0.79
 
 # Euros
 CURRENCY='€'
