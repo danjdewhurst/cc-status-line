@@ -84,6 +84,32 @@ chmod +x ~/.claude/scripts/status-line.sh
 
 ## Customization
 
+### Change color threshold
+
+Edit the threshold for when the context bar turns red (default 60%):
+
+```bash
+[ "$pct" -gt 60 ] && COLOR="$RED" || COLOR="$BLUE"
+```
+
+### Change branch truncation length
+
+Edit the max length (default 20 characters):
+
+```bash
+if [ "${#branch}" -gt 20 ]; then
+    branch="${branch:0:19}…"
+fi
+```
+
+### Use different bar characters
+
+Replace `▓` and `░` with alternatives:
+
+- Circles: `●` and `○`
+- Blocks: `█` and `░`
+- Thin: `┃` and `│`
+
 ### Change currency
 
 Exchange rates are fetched automatically from [Frankfurter API](https://www.frankfurter.app/) and cached for 24 hours. Edit the currency symbol and code (default USD):
@@ -114,32 +140,6 @@ EXCHANGE_RATE=149.50
 ```
 
 Cache is stored at `~/.cache/cc-status-line/exchange-rate.json`.
-
-### Change color threshold
-
-Edit the threshold for when the context bar turns red (default 60%):
-
-```bash
-[ "$pct" -gt 60 ] && COLOR="$RED" || COLOR="$BLUE"
-```
-
-### Change branch truncation length
-
-Edit the max length (default 20 characters):
-
-```bash
-if [ "${#branch}" -gt 20 ]; then
-    branch="${branch:0:19}…"
-fi
-```
-
-### Use different bar characters
-
-Replace `▓` and `░` with alternatives:
-
-- Circles: `●` and `○`
-- Blocks: `█` and `░`
-- Thin: `┃` and `│`
 
 ## Testing
 
