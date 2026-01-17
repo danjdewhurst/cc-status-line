@@ -3,7 +3,7 @@
 A custom status line for [Claude Code](https://github.com/anthropics/claude-code) featuring the [Catppuccin Frappe](https://catppuccin.com/) color palette.
 
 ```
-Opus 4.5 │ feat/my-branch● │ my-project │ ▓▓▓░░░░░░░ 15k/200k │ $0.03
+Opus 4.5 │ feat/my-branch● │ my-project │ ▓▓▓░░░░░░░ 15k/200k │ £0.02
 ```
 
 ## Features
@@ -12,12 +12,13 @@ Opus 4.5 │ feat/my-branch● │ my-project │ ▓▓▓░░░░░░░
 - **Git branch** - Current branch with dirty indicator (●) when uncommitted changes exist
 - **Project folder** - Current working directory name
 - **Context usage** - Visual bar + token count (blue < 60%, red > 60%)
-- **Session cost** - Running total with configurable currency symbol
+- **Session cost** - Running total with configurable currency and exchange rate
 
 ## Requirements
 
 - Terminal with 24-bit true color support (iTerm2, Ghostty, Kitty, WezTerm, Alacritty)
 - `jq` for JSON parsing
+- `bc` for currency conversion
 - `git` (optional, for branch display)
 
 ## Quick Install
@@ -82,14 +83,29 @@ chmod +x ~/.claude/scripts/status-line.sh
 
 ## Customization
 
-### Change currency symbol
+### Change currency
 
-Edit the currency symbol (default `$`):
+Edit the currency symbol and exchange rate (default GBP):
 
 ```bash
-CURRENCY='€'  # Euro
-CURRENCY='£'  # British Pound
-CURRENCY='¥'  # Yen
+CURRENCY='£'              # Currency symbol
+EXCHANGE_RATE=0.79        # USD to GBP
+```
+
+Other examples:
+
+```bash
+# US Dollars (no conversion)
+CURRENCY='$'
+EXCHANGE_RATE=1
+
+# Euros
+CURRENCY='€'
+EXCHANGE_RATE=0.92
+
+# Japanese Yen
+CURRENCY='¥'
+EXCHANGE_RATE=149.50
 ```
 
 ### Change color threshold

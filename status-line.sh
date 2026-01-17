@@ -4,7 +4,8 @@
 # Catppuccin Frappe theme
 
 # Configuration
-CURRENCY='$'  # Currency symbol (e.g., '$', '€', '£', '¥')
+CURRENCY='£'              # Currency symbol (e.g., '$', '€', '£', '¥')
+EXCHANGE_RATE=0.79        # USD to your currency (1 USD = 0.79 GBP)
 
 data=$(cat)
 
@@ -80,10 +81,10 @@ else
     context_info="${bar} ${SUBTEXT}${used_k}k/${max_k}k${RESET}"
 fi
 
-# Format cost
+# Format cost (convert from USD using exchange rate)
 if [ -n "$cost_usd" ] && [ "$cost_usd" != "0" ] && [ "$cost_usd" != "null" ]; then
-    # Format to 2 decimal places
-    cost_fmt=$(printf "%.2f" "$cost_usd" 2>/dev/null || echo "0.00")
+    cost_converted=$(echo "$cost_usd * $EXCHANGE_RATE" | bc -l 2>/dev/null || echo "$cost_usd")
+    cost_fmt=$(printf "%.2f" "$cost_converted" 2>/dev/null || echo "0.00")
     cost_display="${GREEN}${CURRENCY}${cost_fmt}${RESET}"
 else
     cost_display="${OVERLAY}${CURRENCY}0.00${RESET}"
