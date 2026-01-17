@@ -3,6 +3,9 @@
 # Status line - model, git branch, cwd, context usage, cost
 # Catppuccin Frappe theme
 
+# Configuration (via environment variables)
+CURRENCY="${CC_CURRENCY:-\$}"  # Default: $ (e.g., CC_CURRENCY="€" or CC_CURRENCY="£")
+
 data=$(cat)
 
 # Single jq call - extract all values at once (tab-separated)
@@ -77,13 +80,13 @@ else
     context_info="${bar} ${SUBTEXT}${used_k}k/${max_k}k${RESET}"
 fi
 
-# Format cost (show cents if < $1, otherwise dollars)
+# Format cost
 if [ -n "$cost_usd" ] && [ "$cost_usd" != "0" ] && [ "$cost_usd" != "null" ]; then
     # Format to 2 decimal places
     cost_fmt=$(printf "%.2f" "$cost_usd" 2>/dev/null || echo "0.00")
-    cost_display="${GREEN}\$${cost_fmt}${RESET}"
+    cost_display="${GREEN}${CURRENCY}${cost_fmt}${RESET}"
 else
-    cost_display="${OVERLAY}\$0.00${RESET}"
+    cost_display="${OVERLAY}${CURRENCY}0.00${RESET}"
 fi
 
 # Build output

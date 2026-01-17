@@ -12,7 +12,7 @@ Opus 4.5 │ feat/my-branch● │ my-project │ ▓▓▓░░░░░░░
 - **Git branch** - Current branch with dirty indicator (●) when uncommitted changes exist
 - **Project folder** - Current working directory name
 - **Context usage** - Visual bar + token count (blue < 60%, red > 60%)
-- **Session cost** - Running total in USD
+- **Session cost** - Running total with configurable currency symbol
 
 ## Requirements
 
@@ -81,6 +81,18 @@ chmod +x ~/.claude/scripts/status-line.sh
 | Secondary text | Subtext 0 | `(165, 173, 206)` |
 
 ## Customization
+
+### Change currency symbol
+
+Set the `CC_CURRENCY` environment variable to use a different currency symbol (default: `$`):
+
+```bash
+export CC_CURRENCY="€"   # Euro
+export CC_CURRENCY="£"   # British Pound
+export CC_CURRENCY="¥"   # Yen
+```
+
+Add to your shell profile (`.bashrc`, `.zshrc`, etc.) to make it permanent.
 
 ### Change color threshold
 
