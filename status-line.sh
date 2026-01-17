@@ -3,8 +3,8 @@
 # Status line - model, git branch, cwd, context usage, cost
 # Catppuccin Frappe theme
 
-# Configuration (via environment variables)
-CURRENCY="${CC_CURRENCY:-\$}"  # Default: $ (e.g., CC_CURRENCY="€" or CC_CURRENCY="£")
+# Configuration
+CURRENCY='$'  # Currency symbol (e.g., '$', '€', '£', '¥')
 
 data=$(cat)
 

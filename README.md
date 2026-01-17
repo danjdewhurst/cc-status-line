@@ -84,15 +84,13 @@ chmod +x ~/.claude/scripts/status-line.sh
 
 ### Change currency symbol
 
-Set the `CC_CURRENCY` environment variable to use a different currency symbol (default: `$`):
+Edit the currency symbol (default `$`):
 
 ```bash
-export CC_CURRENCY="€"   # Euro
-export CC_CURRENCY="£"   # British Pound
-export CC_CURRENCY="¥"   # Yen
+CURRENCY='€'  # Euro
+CURRENCY='£'  # British Pound
+CURRENCY='¥'  # Yen
 ```
-
-Add to your shell profile (`.bashrc`, `.zshrc`, etc.) to make it permanent.
 
 ### Change color threshold
 
