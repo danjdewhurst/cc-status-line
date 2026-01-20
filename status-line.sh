@@ -3,6 +3,42 @@
 # Status line - model, git branch, cwd, context usage, cost
 # Catppuccin Frappe theme
 
+# Configuration
+CURRENCY='$'              # Currency symbol (e.g., '$', '€', '£', '¥')
+CURRENCY_CODE='USD'       # ISO 4217 code for API lookup (e.g., 'USD', 'GBP', 'EUR', 'JPY')
+EXCHANGE_RATE=1           # Fallback rate if API unavailable
+
+# Cache settings
+CACHE_DIR="${HOME}/.cache/cc-status-line"
+CACHE_FILE="${CACHE_DIR}/exchange-rate.json"
+CACHE_MAX_AGE=86400       # 24 hours in seconds
+
+# Get exchange rate (from cache or API)
+get_exchange_rate() {
+    # Use fallback if no currency code set or set to USD
+    [ -z "$CURRENCY_CODE" ] || [ "$CURRENCY_CODE" = "USD" ] && echo "1" && return
+
+    # Check if cache exists and is fresh
+    if [ -f "$CACHE_FILE" ]; then
+        cache_age=$(( $(date +%s) - $(stat -c %Y "$CACHE_FILE" 2>/dev/null || stat -f %m "$CACHE_FILE" 2>/dev/null || echo 0) ))
+        if [ "$cache_age" -lt "$CACHE_MAX_AGE" ]; then
+            cached_rate=$(jq -r --arg code "$CURRENCY_CODE" '.rates[$code] // empty' "$CACHE_FILE" 2>/dev/null)
+            [ -n "$cached_rate" ] && echo "$cached_rate" && return
+        fi
+    fi
+
+    # Fetch fresh rate (in background to avoid blocking)
+    mkdir -p "$CACHE_DIR"
+    rate=$(curl -sf --max-time 2 "https://api.frankfurter.app/latest?from=USD&to=${CURRENCY_CODE}" 2>/dev/null)
+    if [ -n "$rate" ]; then
+        echo "$rate" > "$CACHE_FILE"
+        jq -r --arg code "$CURRENCY_CODE" '.rates[$code] // empty' <<< "$rate" 2>/dev/null && return
+    fi
+
+    # Fallback to configured rate
+    echo "$EXCHANGE_RATE"
+}
+
 data=$(cat)
 
 # Single jq call - extract all values at once (tab-separated)
@@ -77,13 +113,14 @@ else
     context_info="${bar} ${SUBTEXT}${used_k}k/${max_k}k${RESET}"
 fi
 
-# Format cost (show cents if < $1, otherwise dollars)
+# Format cost (convert from USD using exchange rate)
 if [ -n "$cost_usd" ] && [ "$cost_usd" != "0" ] && [ "$cost_usd" != "null" ]; then
-    # Format to 2 decimal places
-    cost_fmt=$(printf "%.2f" "$cost_usd" 2>/dev/null || echo "0.00")
-    cost_display="${GREEN}\$${cost_fmt}${RESET}"
+    rate=$(get_exchange_rate)
+    cost_converted=$(echo "$cost_usd * $rate" | bc -l 2>/dev/null || echo "$cost_usd")
+    cost_fmt=$(printf "%.2f" "$cost_converted" 2>/dev/null || echo "0.00")
+    cost_display="${GREEN}${CURRENCY}${cost_fmt}${RESET}"
 else
-    cost_display="${OVERLAY}\$0.00${RESET}"
+    cost_display="${OVERLAY}${CURRENCY}0.00${RESET}"
 fi
 
 # Build output

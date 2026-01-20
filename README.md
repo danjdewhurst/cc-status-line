@@ -12,12 +12,14 @@ Opus 4.5 │ feat/my-branch● │ my-project │ ▓▓▓░░░░░░░
 - **Git branch** - Current branch with dirty indicator (●) when uncommitted changes exist
 - **Project folder** - Current working directory name
 - **Context usage** - Visual bar + token count (blue < 60%, red > 60%)
-- **Session cost** - Running total in USD
+- **Session cost** - Running total with auto-updating exchange rates (24h cache)
 
 ## Requirements
 
 - Terminal with 24-bit true color support (iTerm2, Ghostty, Kitty, WezTerm, Alacritty)
 - `jq` for JSON parsing
+- `bc` for currency conversion
+- `curl` for exchange rate API (optional, falls back to manual rate)
 - `git` (optional, for branch display)
 
 ## Quick Install
@@ -107,6 +109,37 @@ Replace `▓` and `░` with alternatives:
 - Circles: `●` and `○`
 - Blocks: `█` and `░`
 - Thin: `┃` and `│`
+
+### Change currency
+
+Exchange rates are fetched automatically from [Frankfurter API](https://www.frankfurter.app/) and cached for 24 hours. Edit the currency symbol and code (default USD):
+
+```bash
+CURRENCY='$'              # Currency symbol
+CURRENCY_CODE='USD'       # ISO 4217 code for API lookup
+EXCHANGE_RATE=1           # Fallback if API unavailable
+```
+
+Other examples:
+
+```bash
+# British Pounds
+CURRENCY='£'
+CURRENCY_CODE='GBP'
+EXCHANGE_RATE=0.79
+
+# Euros
+CURRENCY='€'
+CURRENCY_CODE='EUR'
+EXCHANGE_RATE=0.92
+
+# Japanese Yen
+CURRENCY='¥'
+CURRENCY_CODE='JPY'
+EXCHANGE_RATE=149.50
+```
+
+Cache is stored at `~/.cache/cc-status-line/exchange-rate.json`.
 
 ## Testing
 
