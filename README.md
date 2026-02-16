@@ -3,12 +3,12 @@
 A custom status line for [Claude Code](https://github.com/anthropics/claude-code) featuring the [Catppuccin Frappe](https://catppuccin.com/) color palette.
 
 ```
-Opus 4.5 │ feat/my-branch● │ my-project │ ▓▓▓░░░░░░░ 15k/200k │ $0.03
+Opus 4.6 Med │ feat/my-branch● │ my-project │ ▓▓▓░░░░░░░ 15k/200k │ $0.03
 ```
 
 ## Features
 
-- **Model name** - Current Claude model in use
+- **Model name** - Current Claude model with effort level indicator (Low/Med, hidden for High)
 - **Git branch** - Current branch with dirty indicator (●) when uncommitted changes exist
 - **Project folder** - Current working directory name
 - **Context usage** - Visual bar + token count (blue < 60%, red > 60%)
@@ -146,7 +146,7 @@ Cache is stored at `~/.cache/cc-status-line/exchange-rate.json`.
 Test the script manually:
 
 ```bash
-echo '{"model":{"display_name":"Opus 4.5"},"workspace":{"current_dir":"/Users/you/project"},"context_window":{"context_window_size":200000,"used_percentage":25},"cost":{"total_cost_usd":0.05}}' | ./status-line.sh
+echo '{"model":{"display_name":"Opus 4.6"},"workspace":{"current_dir":"/Users/you/project"},"context_window":{"context_window_size":200000,"used_percentage":25},"cost":{"total_cost_usd":0.05}}' | ./status-line.sh
 ```
 
 ## License
