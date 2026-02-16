@@ -50,6 +50,16 @@ IFS=$'\t' read -r model cwd max_ctx used_pct cost_usd <<< "$(echo "$data" | jq -
     (.cost.total_cost_usd // 0)
 ] | @tsv')"
 
+# Read effort level from Claude Code settings (project-level overrides global)
+effort=""
+project_dir=$(echo "$data" | jq -r '.workspace.project_dir // empty' 2>/dev/null)
+if [ -n "$project_dir" ]; then
+    # Project settings path uses the dir path with / replaced by -
+    project_slug=$(echo "$project_dir" | sed 's|/|-|g')
+    effort=$(jq -r '.effortLevel // empty' "${HOME}/.claude/projects/${project_slug}/settings.json" 2>/dev/null)
+fi
+[ -z "$effort" ] && effort=$(jq -r '.effortLevel // empty' "${HOME}/.claude/settings.json" 2>/dev/null)
+
 # Folder name from path
 folder="${cwd##*/}"
 [ -z "$folder" ] && folder="?"
@@ -123,8 +133,18 @@ else
     cost_display="${OVERLAY}${CURRENCY}0.00${RESET}"
 fi
 
+# Format effort indicator
+effort_display=""
+if [ -n "$effort" ] && [ "$effort" != "null" ]; then
+    case "$effort" in
+        low)    effort_display=" ${SUBTEXT}Low${RESET}" ;;
+        medium) effort_display=" ${SUBTEXT}Med${RESET}" ;;
+        *)      effort_display="" ;;  # hide default (high)
+    esac
+fi
+
 # Build output
-output="${LAVENDER}${model}${RESET}"
+output="${LAVENDER}${model}${RESET}${effort_display}"
 
 if [ -n "$branch" ]; then
     output="${output} ${OVERLAY}│${RESET} ${MAUVE}${branch}${RESET}"
