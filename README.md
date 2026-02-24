@@ -3,7 +3,7 @@
 A custom status line for [Claude Code](https://github.com/anthropics/claude-code) featuring the [Catppuccin Frappe](https://catppuccin.com/) color palette.
 
 ```
-Opus 4.6 Med │ feat/my-branch● │ my-project │ ▓▓▓░░░░░░░ 15k/200k │ $0.03
+Opus 4.6 Med │ feat/my-branch● │ my-project │ ▓▓▓░░░░░░░ 15k/200k │ $0.03 │ v2.1.52
 ```
 
 ## Features
@@ -13,6 +13,7 @@ Opus 4.6 Med │ feat/my-branch● │ my-project │ ▓▓▓░░░░░�
 - **Project folder** - Current working directory name
 - **Context usage** - Visual bar + token count (blue < 60%, red > 60%)
 - **Session cost** - Running total with auto-updating exchange rates (24h cache)
+- **CLI version** - Current Claude Code version
 
 ## Requirements
 
@@ -80,6 +81,7 @@ chmod +x ~/.claude/scripts/status-line.sh
 | Dirty indicator | Peach | `(239, 159, 118)` |
 | Cost | Green | `(166, 209, 137)` |
 | Separators | Overlay 0 | `(115, 121, 148)` |
+| Version | Subtext 0 | `(165, 173, 206)` |
 | Secondary text | Subtext 0 | `(165, 173, 206)` |
 
 ## Customization
