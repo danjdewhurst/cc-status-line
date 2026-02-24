@@ -60,6 +60,9 @@ if [ -n "$project_dir" ]; then
 fi
 [ -z "$effort" ] && effort=$(jq -r '.effortLevel // empty' "${HOME}/.claude/settings.json" 2>/dev/null)
 
+# Get Claude Code version
+cc_version=$(claude --version 2>/dev/null | awk '{print $1}')
+
 # Folder name from path
 folder="${cwd##*/}"
 [ -z "$folder" ] && folder="?"
@@ -154,5 +157,10 @@ fi
 output="${output} ${OVERLAY}│${RESET} ${TEAL}${folder}${RESET}"
 output="${output} ${OVERLAY}│${RESET} ${context_info}"
 output="${output} ${OVERLAY}│${RESET} ${cost_display}"
+
+# Append version segment
+if [ -n "$cc_version" ]; then
+    output="${output} ${OVERLAY}│${RESET} ${SUBTEXT}v${cc_version}${RESET}"
+fi
 
 printf '%b\n' "$output"
