@@ -3,12 +3,12 @@
 A custom status line for [Claude Code](https://github.com/anthropics/claude-code) featuring the [Catppuccin Frappe](https://catppuccin.com/) color palette.
 
 ```
-Opus 4.6 Med │ feat/my-branch● │ my-project │ ▓▓▓░░░░░░░ 15k/200k │ $0.03 │ v2.1.52
+Opus 4.6 │ feat/my-branch● │ my-project │ ▓▓▓░░░░░░░ 15k/200k │ $0.03 │ v2.1.52
 ```
 
 ## Features
 
-- **Model name** - Current Claude model with effort level indicator (Low/Med, hidden for High)
+- **Model name** - Current Claude model
 - **Git branch** - Current branch with dirty indicator (●) when uncommitted changes exist
 - **Project folder** - Current working directory name
 - **Context usage** - Visual bar + token count (blue < 60%, red > 60%)
