@@ -1,7 +1,7 @@
 <p align="center">
   <h1 align="center">Claude Code Status Line</h1>
   <p align="center">
-    A <a href="https://catppuccin.com/">Catppuccin Frappe</a>-themed status line for <a href="https://github.com/anthropics/claude-code">Claude Code</a>
+    A <a href="https://catppuccin.com/">Catppuccin</a>-themed status line for <a href="https://github.com/anthropics/claude-code">Claude Code</a>
   </p>
 </p>
 
@@ -61,6 +61,23 @@ Restart Claude Code or start a new session.
 ## Customisation
 
 <details>
+<summary><strong>Change colour palette</strong></summary>
+
+Four [Catppuccin](https://catppuccin.com/) flavors are available. Edit the variable at the top of the script:
+
+```bash
+CATPPUCCIN_FLAVOR='frappe'  # Options: 'latte', 'frappe', 'macchiato', 'mocha'
+```
+
+| Flavor | Description |
+|--------|-------------|
+| `latte` | Light theme |
+| `frappe` | Muted dark theme (default) |
+| `macchiato` | Medium contrast dark theme |
+| `mocha` | Darkest theme |
+</details>
+
+<details>
 <summary><strong>Change currency</strong></summary>
 
 Exchange rates are fetched from the [Frankfurter API](https://www.frankfurter.app/) and cached for 24 hours at `~/.cache/cc-status-line/exchange-rate.json`.
@@ -113,19 +130,19 @@ fi
 
 ## Colour Palette
 
-All colours are from [Catppuccin Frappe](https://github.com/catppuccin/catppuccin):
+All colours are from [Catppuccin](https://github.com/catppuccin/catppuccin). The table below shows which palette roles map to which UI elements (colours vary by flavor):
 
-| Element | Colour | RGB |
-|---------|--------|-----|
-| Model | Lavender | `186, 187, 241` |
-| Branch | Mauve | `202, 158, 230` |
-| Folder | Teal | `129, 200, 190` |
-| Context (low) | Blue | `140, 170, 238` |
-| Context (high) | Red | `231, 130, 132` |
-| Dirty indicator | Peach | `239, 159, 118` |
-| Cost | Green | `166, 209, 137` |
-| Separators | Overlay 0 | `115, 121, 148` |
-| Version / secondary | Subtext 0 | `165, 173, 206` |
+| Element | Palette Role |
+|---------|-------------|
+| Model | Lavender |
+| Branch | Mauve |
+| Folder | Teal |
+| Context (low) | Blue |
+| Context (high) | Red |
+| Dirty indicator | Peach |
+| Cost | Green |
+| Separators | Overlay 0 |
+| Version / secondary | Subtext 0 |
 
 ## Testing
 
