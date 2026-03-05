@@ -1,9 +1,10 @@
 #!/bin/bash
 
 # Status line - model, git branch, cwd, context usage, cost
-# Catppuccin Frappe theme
+# Catppuccin theme (https://catppuccin.com)
 
 # Configuration
+CATPPUCCIN_FLAVOR='frappe' # Catppuccin flavor: 'latte', 'frappe', 'macchiato', 'mocha'
 CURRENCY='$'              # Currency symbol (e.g., '$', '€', '£', '¥')
 CURRENCY_CODE='USD'       # ISO 4217 code for API lookup (e.g., 'USD', 'GBP', 'EUR', 'JPY')
 EXCHANGE_RATE=1           # Fallback rate if API unavailable
@@ -75,16 +76,55 @@ if git rev-parse --git-dir > /dev/null 2>&1; then
     fi
 fi
 
-# Catppuccin Frappe colors (24-bit true color)
-BLUE='\033[38;2;140;170;238m'      # Blue - context bar (low)
-RED='\033[38;2;231;130;132m'       # Red - context bar (high)
-TEAL='\033[38;2;129;200;190m'      # Teal - folder
-MAUVE='\033[38;2;202;158;230m'     # Mauve - git branch
-LAVENDER='\033[38;2;186;187;241m'  # Lavender - model
-PEACH='\033[38;2;239;159;118m'     # Peach - dirty indicator
-GREEN='\033[38;2;166;209;137m'     # Green - cost
-OVERLAY='\033[38;2;115;121;148m'   # Overlay 0 - separators
-SUBTEXT='\033[38;2;165;173;206m'   # Subtext 0 - secondary text
+# Catppuccin colors (24-bit true color)
+# Set colors based on selected flavor
+flavor=$(echo "$CATPPUCCIN_FLAVOR" | tr '[:upper:]' '[:lower:]')
+case "$flavor" in
+    latte)
+        BLUE='\033[38;2;30;102;245m'       # #1e66f5
+        RED='\033[38;2;210;15;57m'         # #d20f39
+        TEAL='\033[38;2;23;146;153m'       # #179299
+        MAUVE='\033[38;2;136;57;239m'      # #8839ef
+        LAVENDER='\033[38;2;114;135;253m'  # #7287fd
+        PEACH='\033[38;2;254;100;11m'      # #fe640b
+        GREEN='\033[38;2;64;160;43m'       # #40a02b
+        OVERLAY='\033[38;2;156;160;176m'   # #9ca0b0
+        SUBTEXT='\033[38;2;108;111;133m'   # #6c6f85
+        ;;
+    macchiato)
+        BLUE='\033[38;2;138;173;244m'      # #8aadf4
+        RED='\033[38;2;237;135;150m'       # #ed8796
+        TEAL='\033[38;2;139;213;202m'      # #8bd5ca
+        MAUVE='\033[38;2;198;160;246m'     # #c6a0f6
+        LAVENDER='\033[38;2;183;189;248m'  # #b7bdf8
+        PEACH='\033[38;2;245;169;127m'     # #f5a97f
+        GREEN='\033[38;2;166;218;149m'     # #a6da95
+        OVERLAY='\033[38;2;110;115;141m'   # #6e738d
+        SUBTEXT='\033[38;2;165;173;203m'   # #a5adcb
+        ;;
+    mocha)
+        BLUE='\033[38;2;137;180;250m'      # #89b4fa
+        RED='\033[38;2;243;139;168m'       # #f38ba8
+        TEAL='\033[38;2;148;226;213m'      # #94e2d5
+        MAUVE='\033[38;2;203;166;247m'     # #cba6f7
+        LAVENDER='\033[38;2;180;190;254m'  # #b4befe
+        PEACH='\033[38;2;250;179;135m'     # #fab387
+        GREEN='\033[38;2;166;227;161m'     # #a6e3a1
+        OVERLAY='\033[38;2;108;112;134m'   # #6c7086
+        SUBTEXT='\033[38;2;166;173;200m'   # #a6adc8
+        ;;
+    *) # frappe (default)
+        BLUE='\033[38;2;140;170;238m'      # #8caaee
+        RED='\033[38;2;231;130;132m'       # #e78284
+        TEAL='\033[38;2;129;200;190m'      # #81c8be
+        MAUVE='\033[38;2;202;158;230m'     # #ca9ee6
+        LAVENDER='\033[38;2;186;187;241m'  # #babbf1
+        PEACH='\033[38;2;239;159;118m'     # #ef9f76
+        GREEN='\033[38;2;166;209;137m'     # #a6d189
+        OVERLAY='\033[38;2;115;121;148m'   # #737994
+        SUBTEXT='\033[38;2;165;173;206m'   # #a5adce
+        ;;
+esac
 RESET='\033[0m'
 
 # Format context bar
